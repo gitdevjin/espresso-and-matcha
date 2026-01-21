@@ -62,7 +62,7 @@ export default function ChatPage() {
   // Scroll to bottom on initial load
   useEffect(() => {
     if (firstLoadRef.current && data) {
-      chatEndRef.current?.scrollIntoView({ behavior: "auto" });
+      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
       firstLoadRef.current = false;
     }
   }, [data]);
@@ -79,13 +79,13 @@ export default function ChatPage() {
         Espresso & Matcha
       </div>
 
-      {/* ADD Loading */}
+      {/* ADD Loading
       {isFetchingNextPage && (
         <div className="text-muted-foreground flex flex-col items-center justify-center gap-3">
           <LoaderCircleIcon className="animate-spin" />
           <div className="text-sm">Loading...</div>
         </div>
-      )}
+      )} */}
 
       {/* Chat area */}
       <div className="flex-1 flex flex-col-reverse overflow-y-auto space-y-2 px-4">
@@ -120,7 +120,8 @@ export default function ChatPage() {
             </div>
           );
         })}
-        <div ref={topRef} className="h-1.5" />
+        <div className="h-5"></div>
+        <div ref={topRef} className="h-2" />
         <div ref={chatEndRef} />
       </div>
 
