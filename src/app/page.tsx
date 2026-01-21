@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { User } from "@/types";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
@@ -58,18 +59,9 @@ export default function Home() {
     return <div className="p-6 text-red-500">{error}</div>;
   }
 
-  console.log(users);
-
   return (
-    <div className="flex min-h-screen items-start gap-6 p-6 font-sans">
-      <div>
-        {users.length > 0 &&
-          users.map((user) => (
-            <div key={user.id} className="text-sm">
-              {user.name}
-            </div>
-          ))}
-      </div>
+    <div className="flex min-h-screen items-center justify-center gap-6 p-6 font-sans">
+      <Button onClick={() => router.push("/chats")}>Go To Chat</Button>
     </div>
   );
 }
