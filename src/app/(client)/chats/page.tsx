@@ -11,6 +11,7 @@ import { useInView } from "react-intersection-observer";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { LoaderCircleIcon } from "lucide-react";
 
 export default function ChatPage() {
   const router = useRouter();
@@ -26,6 +27,7 @@ export default function ChatPage() {
     error: isFetchMessagesError,
     isPending: isFetchMessagesPending,
     fetchNextPage,
+    isFetchingNextPage,
   } = useInfiniteMessagesQuery();
 
   const [content, setContent] = useState("");
@@ -73,9 +75,17 @@ export default function ChatPage() {
   return (
     <div className="flex flex-col full-dvh max-w-175 mx-auto border-x p-4">
       {/* Current user */}
-      <div className="mb-2 text-lg font-semibold text-center">
+      <div className="mb-1 text-md font-semibold text-center">
         Espresso & Matcha
       </div>
+
+      {/* ADD Loading */}
+      {isFetchingNextPage && (
+        <div className="text-muted-foreground flex flex-col items-center justify-center gap-3">
+          <LoaderCircleIcon className="animate-spin" />
+          <div className="text-sm">Loading...</div>
+        </div>
+      )}
 
       {/* Chat area */}
       <div className="flex-1 flex flex-col-reverse overflow-y-auto space-y-2 px-4">
