@@ -10,8 +10,11 @@ import { useSession } from "@/hooks/queries/use-session";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function ChatPage() {
+  const router = useRouter();
+
   const {
     data: currentUser,
     isPending: isFetchMePending,
@@ -42,6 +45,12 @@ export default function ChatPage() {
     },
   });
 
+  useEffect(() => {
+    if (!isFetchMePending && !currentUser) {
+      router.push("/auth/login"); // change to your login path
+    }
+  }, [currentUser, isFetchMePending, router]);
+
   // Infinite scroll for older messages
   const { ref: topRef, inView } = useInView();
   useEffect(() => {
@@ -62,7 +71,7 @@ export default function ChatPage() {
   const allMessages = data.pages.flat(); // oldest → newest
 
   return (
-    <div className="flex flex-col h-screen max-w-175 mx-auto border-x p-4">
+    <div className="flex flex-col full-dvh max-w-175 mx-auto border-x p-4">
       {/* Current user */}
       <div className="mb-2 text-lg font-semibold text-center">
         Espresso & Matcha

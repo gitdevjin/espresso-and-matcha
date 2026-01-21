@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+.full-dvh {
+  height: 100dvh;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
