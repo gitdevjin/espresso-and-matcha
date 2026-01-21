@@ -120,9 +120,10 @@ export default function ChatPage() {
             </div>
           );
         })}
-        <div className="h-5"></div>
+
         <div ref={topRef} className="h-2" />
         <div ref={chatEndRef} />
+        <div className="h-5"></div>
       </div>
 
       {/* Input area */}
