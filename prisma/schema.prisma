@@ -14,13 +14,13 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  password String
+  messages Message[]
 }
 
-model Post {
+model Message {
   id        Int      @id @default(autoincrement())
   content   String?
   createdAt DateTime @default(now())
