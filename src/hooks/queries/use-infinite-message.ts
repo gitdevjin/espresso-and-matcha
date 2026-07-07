@@ -28,6 +28,6 @@ export function useInfiniteMessagesQuery() {
       return allPages.length; // or allPages.flat().length
     },
     staleTime: Infinity,
-    refetchInterval: 3000,
+    refetchInterval: 7000,
   });
 }

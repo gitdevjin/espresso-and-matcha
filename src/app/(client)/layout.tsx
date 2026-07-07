@@ -16,7 +16,6 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
   });
   return (
     <QueryClientProvider client={queryClient}>
-      <Toaster />
       <SessionProvider>{children}</SessionProvider>
     </QueryClientProvider>
   );

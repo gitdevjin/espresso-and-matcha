@@ -13,19 +13,28 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Coffee } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function LoginForm() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const { token } = await login(name, password);
       localStorage.setItem("token", token);
+      toast.success("Logged in successfully", { position: "top-center" });
       window.location.href = "/chats";
     } catch (err) {
-      console.error("Login failed", err);
+      toast.error(err instanceof Error ? err.message : "Something went wrong", {
+        position: "top-center",
+      });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -46,7 +55,7 @@ export default function LoginForm() {
             <Input
               id="name"
               type="text"
-              placeholder="not your real name"
+              placeholder="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
